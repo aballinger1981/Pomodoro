@@ -54,9 +54,58 @@
       bottom: 178px;
       width: 0;
       height: 0;
-      border-left: 200px solid transparent;  /* left arrow slant */
-      border-right: 200px solid transparent; /* right arrow slant */
-      border-bottom: 200px solid seagreen; /* bottom, add background color here */
+      border-left: 1px solid transparent;  /* left arrow slant */
+      border-right: 1px solid transparent; /* right arrow slant */
+      border-bottom: 1px solid seagreen; /* bottom, add background color here */
       font-size: 0;
       line-height: 0;
+    }
+
+    div.top-sand {
+      position: absolute;
+      left: 310px;
+      top: 27px;
+      width: 0;
+      height: 0;
+      border-left: 1px solid transparent;  /* left arrow slant */
+      border-right: 1px solid transparent; /* right arrow slant */
+      border-top: 1px solid seagreen; /* bottom, add background color here */
+      font-size: 0;
+      line-height: 0;
+    }
+
+    .bottom-sand {
+      animation: grow 100s ease;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes grow {
+      0% {
+        left: 400px;
+        bottom: 167px;
+        border-left: 1px solid transparent;
+        border-right: 1px solid transparent;
+        border-bottom: 1px solid seagreen;
+      }
+      25% {
+        left: 250px;
+        bottom: 167px;
+        border-left: 150px solid transparent;
+        border-right: 150px solid transparent;
+        border-bottom: 200px solid seagreen;
+      }
+      50% {
+        left: 150px;
+        bottom: 167px;
+        border-left: 250px solid transparent;
+        border-right: 250px solid transparent;
+        border-bottom: 300px solid seagreen;
+      }
+      100% {
+        left: 48px;
+        bottom: 167px;
+        border-left: 360px solid transparent;
+        border-right: 360px solid transparent;
+        border-bottom: 450px solid seagreen;
+      }
     }
