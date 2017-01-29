@@ -3,9 +3,9 @@
       position: absolute;
       width: 0;
       height: 0;
-      border-left: 400px solid transparent;
-      border-right: 400px solid transparent;
-      border-top: 500px solid #2f2f2f;
+      border-left: 15vw solid transparent;
+      border-right: 15vw solid transparent;
+      border-top: 25vw solid #2f2f2f;
       font-size: 0;
       line-height: 0;
     }
@@ -16,9 +16,9 @@
       top: 27px;
       width: 0;
       height: 0;
-      border-left: 360px solid transparent;
-      border-right: 360px solid transparent;
-      border-top: 450px solid white;
+      border-left: 13vw solid transparent;
+      border-right: 13vw solid transparent;
+      border-top: 22vw solid white;
       font-size: 0;
       line-height: 0;
     }
@@ -28,22 +28,22 @@
       top: 410px;
       width: 0;
       height: 0;
-      border-left: 400px solid transparent;  /* left arrow slant */
-      border-right: 400px solid transparent; /* right arrow slant */
-      border-bottom: 500px solid #2f2f2f; /* bottom, add background color here */
+      border-left: 15vw solid transparent;  /* left arrow slant */
+      border-right: 15vw solid transparent; /* right arrow slant */
+      border-bottom: 25vw solid #2f2f2f; /* bottom, add background color here */
       font-size: 0;
       line-height: 0;
     }
 
     div.inner-bottom {
       position: absolute;
-      top: 442px;
+      top: 448px;
       left: 48px;
       width: 0;
       height: 0;
-      border-left: 360px solid transparent;  /* left arrow slant */
-      border-right: 360px solid transparent; /* right arrow slant */
-      border-bottom: 450px solid white; /* bottom, add background color here */
+      border-left: 13vw solid transparent;  /* left arrow slant */
+      border-right: 13vw solid transparent; /* right arrow slant */
+      border-bottom: 22vw solid white; /* bottom, add background color here */
       font-size: 0;
       line-height: 0;
     }
@@ -90,22 +90,22 @@
       25% {
         left: 250px;
         bottom: 167px;
-        border-left: 150px solid transparent;
-        border-right: 150px solid transparent;
-        border-bottom: 200px solid seagreen;
+        border-left: 5vw solid transparent;
+        border-right: 5vw solid transparent;
+        border-bottom: 22vw solid seagreen;
       }
       50% {
         left: 150px;
         bottom: 167px;
-        border-left: 250px solid transparent;
-        border-right: 250px solid transparent;
-        border-bottom: 300px solid seagreen;
+        border-left: 10vw solid transparent;
+        border-right: 10vw solid transparent;
+        border-bottom: 22vw solid seagreen;
       }
       100% {
         left: 48px;
         bottom: 167px;
-        border-left: 360px solid transparent;
-        border-right: 360px solid transparent;
-        border-bottom: 450px solid seagreen;
+        border-left: 13vw solid transparent;
+        border-right: 13vw solid transparent;
+        border-bottom: 22vw solid seagreen;
       }
     }
