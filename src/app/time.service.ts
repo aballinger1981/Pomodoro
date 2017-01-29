@@ -15,7 +15,7 @@ export class TimeService {
   pausedTime: number = 0;
 
   constructor() { }
-
+  // test
   getTimeRemaining() {
     let milliseconds: number;
     if (this.currentMode === 'pomodoroTimer' && this.pomodoroLength !== null
