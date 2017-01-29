@@ -1,0 +1,12 @@
+<p>Break Length:
+<input type="number" [(ngModel)]="timeService.breakLength" min="1"></p>
+
+<p>Pomodoro Length:
+<input type="number" [(ngModel)]="timeService.pomodoroLength" min="1"></p>
+
+<p>Start Timer Automatically?
+<input type="checkbox" [(ngModel)]="timeService.autoStartNewTimers"></p>
+
+<p>Pomodoro Count:
+<span>{{timeService.numberOfPomodoros}}</span>
+<button (click)="timeService.clearCount()">Clear</button></p>
