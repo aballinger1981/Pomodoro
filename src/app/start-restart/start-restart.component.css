@@ -1,0 +1,19 @@
+button {
+  height: 33%;
+  border-radius: 50%;
+  border: .3vw solid black;
+  font-size: 1.2vw;
+  outline: none;
+}
+
+#start {
+  background-color: #00E202;
+}
+
+#pause {
+  background-color: #FFE163;
+}
+
+#stop {
+  background-color: tomato;
+}

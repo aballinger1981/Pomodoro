@@ -1,3 +1,4 @@
-<button (click)="startOrRestartTimer()">{{timeService.startButtonState}}</button>
-<button (click)="pauseOrResume()">{{pauseResumeButtonText}}</button>
-<button (click)="stop()">Stop</button>
+<button (click)="stop()" id="stop">Stop</button>
+<button (click)="pauseOrResume()" id="pause">{{pauseResumeButtonText}}</button>
+<button (click)="startOrRestartTimer()" id="start">{{timeService.startButtonState}}</button>
+

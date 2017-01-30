@@ -17,31 +17,6 @@ export class TimeService {
 
   constructor() { }
 
-  getTimeRemaining(timerLength) {
-    let milliseconds: number;
-    if (this.currentMode === 'pomodoroTimer') {
-      milliseconds = (timerLength * 60000) - (Date.now() - this.startTime - this.pausedTime);
-      this.convertTime(milliseconds);
-    } else if (this.currentMode === 'breakTimer') {
-      milliseconds = (timerLength * 60000) - (Date.now() - this.startTime - this.pausedTime);
-      this.convertTime(milliseconds);
-    }
-  }
-
-  convertTime(milliseconds) {
-    const totalSeconds: number = Math.floor(milliseconds / 1000);
-    const minutes: number = this.addZeroToTimeRemainingIfNeeded(Math.floor(totalSeconds / 60));
-    const seconds: number = this.addZeroToTimeRemainingIfNeeded(totalSeconds - minutes * 60);
-    this.timeRemaining = minutes + ':' + seconds;
-    this.checkIfTimerIsFinishedAndAutoStartIsChecked(totalSeconds);
-  }
-
-  addZeroToTimeRemainingIfNeeded(minutesOrSeconds) {
-    if (minutesOrSeconds.toString().length >= 2) { return minutesOrSeconds; }
-
-    return (Math.pow(10, 2) + Math.floor(minutesOrSeconds)).toString().substring(1);
-  }
-
   startTimerTracking() {
     clearInterval(this.intervalId);
     this.startTime = new Date().getTime();
@@ -60,9 +35,34 @@ export class TimeService {
       this.intervalId = setInterval(() => { this.getTimeRemaining(this.savedLengths[0]); }, 100);
     } else if (this.currentMode === 'pomodoroTimer' && this.pomodoroLength > 0) {
       this.intervalId = setInterval(() => { this.getTimeRemaining(this.savedLengths[0]); }, 100);
-    } else if (this.currentMode === 'breakTimer' && this.breakLength >   0) {
+    } else if (this.currentMode === 'breakTimer' && this.breakLength > 0) {
       this.intervalId = setInterval(() => { this.getTimeRemaining(this.savedLengths[1]); }, 100);
     }
+  }
+
+  getTimeRemaining(timerLength): void {
+    let milliseconds: number;
+    if (this.currentMode === 'pomodoroTimer') {
+      milliseconds = (timerLength * 60000) - (Date.now() - this.startTime - this.pausedTime);
+    } else if (this.currentMode === 'breakTimer') {
+      milliseconds = (timerLength * 60000) - (Date.now() - this.startTime - this.pausedTime);
+    }
+
+    this.convertTime(milliseconds);
+  }
+
+  convertTime(milliseconds) {
+    const totalSeconds: number = Math.floor(milliseconds / 1000);
+    const minutes: number = this.addZeroToTimeRemainingIfNeeded(Math.floor(totalSeconds / 60));
+    const seconds: number = this.addZeroToTimeRemainingIfNeeded(totalSeconds - minutes * 60);
+    this.timeRemaining = minutes + ':' + seconds;
+    this.checkIfTimerIsFinishedAndAutoStartIsChecked(totalSeconds);
+  }
+
+  addZeroToTimeRemainingIfNeeded(minutesOrSeconds) {
+    if (minutesOrSeconds.toString().length >= 2) { return minutesOrSeconds; }
+
+    return (Math.pow(10, 2) + Math.floor(minutesOrSeconds)).toString().substring(1);
   }
 
   checkIfTimerIsFinishedAndAutoStartIsChecked(timeLeft) {

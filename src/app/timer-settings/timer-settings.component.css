@@ -1,0 +1,11 @@
+div {
+  font-size: 1vw;
+}
+
+.clear {
+  background: none;
+  border: none;
+  outline: none;
+  color: brown;
+  font-size: 1vw;
+}
