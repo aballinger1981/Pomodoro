@@ -13,20 +13,17 @@ export class TimeService {
   intervalId: any;
   timerIsRunning: boolean = false;
   pausedTime: number = 0;
+  savedLengths: number[] = [];
 
   constructor() { }
-  // test
-  getTimeRemaining() {
+
+  getTimeRemaining(timerLength) {
     let milliseconds: number;
-    if (this.currentMode === 'pomodoroTimer' && this.pomodoroLength !== null
-      && this.pomodoroLength > 0) {
-      milliseconds = (this.pomodoroLength * 60000) -
-        (Date.now() - this.startTime - this.pausedTime);
+    if (this.currentMode === 'pomodoroTimer') {
+      milliseconds = (timerLength * 60000) - (Date.now() - this.startTime - this.pausedTime);
       this.convertTime(milliseconds);
-    } else if (this.currentMode === 'breakTimer' && this.breakLength !== null
-      && this.breakLength > 0) {
-      milliseconds = (this.breakLength * 60000) -
-        (Date.now() - this.startTime - this.pausedTime);
+    } else if (this.currentMode === 'breakTimer') {
+      milliseconds = (timerLength * 60000) - (Date.now() - this.startTime - this.pausedTime);
       this.convertTime(milliseconds);
     }
   }
@@ -46,23 +43,25 @@ export class TimeService {
   }
 
   startTimerTracking() {
-    if (this.pomodoroLength === null || this.breakLength === null) { return; }
-    if (this.pomodoroLength <= 0 || this.breakLength <= 0) { return; }
-
+    clearInterval(this.intervalId);
+    this.startTime = new Date().getTime();
     this.pausedTime = 0;
-    if (this.currentMode === 'pomodoroFinished') {
+    this.savedLengths = [];
+    this.savedLengths.push(this.pomodoroLength);
+    this.savedLengths.push(this.breakLength);
+
+    if (this.currentMode === 'pomodoroFinished' && this.breakLength > 0) {
       this.updateCurrentMode();
       this.startButtonState = 'Restart Break';
-      this.startTime = new Date().getTime();
-      this.intervalId = setInterval(() => { this.getTimeRemaining(); }, 100);
-    } else if (this.currentMode === 'breakFinished') {
+      this.intervalId = setInterval(() => { this.getTimeRemaining(this.savedLengths[1]); }, 100);
+    } else if (this.currentMode === 'breakFinished' && this.pomodoroLength > 0) {
       this.updateCurrentMode();
       this.startButtonState = 'Restart Pomodoro';
-      this.startTime = new Date().getTime();
-      this.intervalId = setInterval(() => { this.getTimeRemaining(); }, 100);
-    } else {
-      this.startTime = new Date().getTime();
-      this.intervalId = setInterval(() => { this.getTimeRemaining(); }, 100);
+      this.intervalId = setInterval(() => { this.getTimeRemaining(this.savedLengths[0]); }, 100);
+    } else if (this.currentMode === 'pomodoroTimer' && this.pomodoroLength > 0) {
+      this.intervalId = setInterval(() => { this.getTimeRemaining(this.savedLengths[0]); }, 100);
+    } else if (this.currentMode === 'breakTimer' && this.breakLength >   0) {
+      this.intervalId = setInterval(() => { this.getTimeRemaining(this.savedLengths[1]); }, 100);
     }
   }
 

@@ -15,7 +15,7 @@ export class StartRestartComponent implements OnInit {
   ngOnInit() {
   }
 
-  changeModeOrRestartTimer() {
+  startOrRestartTimer() {
     if (this.timeService.pomodoroLength === null
       || this.timeService.breakLength === null
       || this.timeService.pomodoroLength <= 0
@@ -30,10 +30,8 @@ export class StartRestartComponent implements OnInit {
       this.timeService.startButtonState = 'Restart Pomodoro';
     } else if (timerMode === 'pomodoroTimer') {
       this.timeService.startButtonState = 'Restart Pomodoro';
-      clearInterval(this.timeService.intervalId);
     } else if (timerMode === 'breakTimer') {
       this.timeService.startButtonState = 'Restart Break';
-      clearInterval(this.timeService.intervalId);
     }
     this.timeService.startTimerTracking();
     this.pauseResumeButtonText = 'Pause';
@@ -53,11 +51,19 @@ export class StartRestartComponent implements OnInit {
       this.pauseStartTime = new Date().getTime();
     } else if (this.timeService.timerIsRunning === false) {
       this.timeService.pausedTime += new Date().getTime() - this.pauseStartTime;
-      this.timeService.intervalId = setInterval(() => {
-        this.timeService.getTimeRemaining();
-      }, 100);
-      this.pauseResumeButtonText = 'Pause';
-      this.timeService.timerIsRunning = true;
+      if (this.timeService.currentMode === 'pomodoroTimer') {
+        this.timeService.intervalId = setInterval(() => {
+          this.timeService.getTimeRemaining(this.timeService.savedLengths[0]);
+        }, 100);
+        this.pauseResumeButtonText = 'Pause';
+        this.timeService.timerIsRunning = true;
+      } else {
+        this.timeService.intervalId = setInterval(() => {
+          this.timeService.getTimeRemaining(this.timeService.savedLengths[1]);
+        }, 100);
+        this.pauseResumeButtonText = 'Pause';
+        this.timeService.timerIsRunning = true;
+      }
     }
   }
 
@@ -66,6 +72,7 @@ export class StartRestartComponent implements OnInit {
     this.timeService.timeRemaining = undefined;
     this.timeService.timerIsRunning = false;
     this.pauseResumeButtonText = 'Pause';
+    this.timeService.savedLengths = [];
     if (this.timeService.currentMode === 'pomodoroTimer') {
       this.timeService.startButtonState = 'Start Pomodoro';
     } else if (this.timeService.currentMode === 'breakTimer') {
