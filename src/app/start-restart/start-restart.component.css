@@ -1,5 +1,6 @@
 button {
-  height: 33%;
+  height: 30%;
+  width: 90%;
   border-radius: 50%;
   border: .3vw solid black;
   font-size: 1.2vw;
