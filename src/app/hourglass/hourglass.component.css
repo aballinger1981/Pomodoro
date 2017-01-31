@@ -18,3 +18,15 @@
 
 .outside { stop-color: #079B66; }
 .inside { stop-color: #0AD387; }
+
+.glass-texture {
+  fill: url(#Water_5);
+}
+
+.top-bottom-sand {
+  fill: url(#Earthtone_4);
+}
+
+.top-top-sand {
+  fill: url(#Earthtone_5);
+}

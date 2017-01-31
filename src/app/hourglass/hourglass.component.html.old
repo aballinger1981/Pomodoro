@@ -1,0 +1,15 @@
+<svg viewBox="0 0 154 263.8">
+  <defs>
+      <linearGradient id="Gradient1">
+        <stop class="outside" offset="0%"/>
+        <stop class="inside" offset="50%"/>
+        <stop class="outside" offset="100%"/>
+      </linearGradient>
+  </defs>
+
+  <svg:polygon #bottomSand class="bottom-sand" id="test"
+  points="50,260.3 60,260.3 77,258.9 94,260.3 100,260.3" />
+  <svg:polygon #topTriangle class="top-triangle" points="2,2 152,2 77,131.9" />
+  <svg:polygon #bottomTriangle class="bottom-triangle" points="2,261.8 77,131.9 152,261.8" />
+  <svg:rect #innerRectangle class="inner-rectangle" x="74.5" y="127" width="5" height="10" />
+</svg>
