@@ -1,0 +1,20 @@
+.inner-rectangle, .top-triangle, .bottom-triangle {
+  fill: none;
+  stroke: black;
+  stroke-width: 3;
+}
+
+.inner-rectangle {
+  fill: white;
+  stroke-dasharray: 0,5,10,0;
+}
+
+.bottom-sand {
+  /*fill: lightslategray;*/
+  /*transform: scaleY(.10) scaleX(.3);
+  transform-origin: 50% 100%;*/
+  fill: url(#Gradient1);
+}
+
+.outside { stop-color: #079B66; }
+.inside { stop-color: #0AD387; }
