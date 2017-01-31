@@ -2,24 +2,33 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   align-content: center;
+  /*justify-content: center;*/
 }
 
 .stoplight-hourglass {
   display: flex;
   flex-direction: row;
+  min-height: 28vw;
+  padding: 2vw 0 2vw 0;
 }
 
 app-start-restart {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  border: .4vw solid black;
+  align-items: center;
+  border: 1vw solid black;
+  background-color: black;
+  border-radius: 30px;
 }
 
 app-hourglass {
+  width: 13vw;
   padding: 0 0 0 2vw;
-  width: 12vw;
+}
+
+app-clock {
+  font-size: 2vw;
 }
