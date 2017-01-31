@@ -22,6 +22,7 @@ app-start-restart {
   border: 1vw solid black;
   background-color: black;
   border-radius: 30px;
+  width:11vw;
 }
 
 app-hourglass {
