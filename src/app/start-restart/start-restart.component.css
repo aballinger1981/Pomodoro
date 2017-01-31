@@ -10,6 +10,10 @@ button {
   background-image: radial-gradient(top, ellipse cover, rgba(255,255,255,0.38) 0%, rgba(255,255,255,0) 100%);
 }
 
+button:active {
+  background-image: radial-gradient(top, ellipse cover, rgba(255,255,255,0.58) 0%, rgba(255,255,255,0) 100%);
+}
+
 #start {
   background-color: #43C532;
 }
