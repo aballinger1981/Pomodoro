@@ -4,17 +4,20 @@ button {
   border-radius: 50%;
   border: .3vw solid black;
   font-size: 1.2vw;
+  font-weight: 600;
   outline: none;
+  box-shadow: 0px -10px 0px grey;
+  background-image: radial-gradient(top, ellipse cover, rgba(255,255,255,0.38) 0%, rgba(255,255,255,0) 100%);
 }
 
 #start {
-  background-color: #00E202;
+  background-color: #43C532;
 }
 
 #pause {
-  background-color: #FFE163;
+  background-color: #F6D200;
 }
 
 #stop {
-  background-color: tomato;
+  background-color: #D10A11;
 }
