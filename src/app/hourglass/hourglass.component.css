@@ -25,6 +25,7 @@
 
 .top-bottom-sand {
   fill: url(#Earthtone_4);
+  transform-origin: 50% 50%;
 }
 
 .top-top-sand {
