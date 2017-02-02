@@ -9,50 +9,121 @@ import { TimeService } from '../time.service';
 export class HourglassComponent implements OnInit {
   @ViewChild('topBottomSand') topBottomSand: ElementRef;
   @ViewChild('topTopSand') topTopSand: ElementRef;
+  @ViewChild('droppingSand1') droppingSand1: ElementRef;
+  @ViewChild('droppingSand2') droppingSand2: ElementRef;
+  @ViewChild('droppingSand3') droppingSand3: ElementRef;
   // @ViewChild('bottomTriangle') bottomTriangle: ElementRef;
   // @ViewChild('innerRectangle') innerRectangle: ElementRef;
 
   constructor(private timeService: TimeService) { }
 
   ngOnInit() {
-    TweenMax.to(this.topBottomSand.nativeElement, 50, {
+    const topBottomSandTimeline: TimelineLite = new TimelineLite();
+    topBottomSandTimeline.to(this.topBottomSand.nativeElement, 5, {
       attr: {
-        d: `M 100.4,220.36
-            a 1.6,1.6 0 0,0 0.43,-0.07
-            c 1.21,-0.4 5.42,-2 7.15,-3.41
-            a 1.35,1.35 0 0,0 0.21,-1.46
-            H 92.72
-            c 1.73,1.46 6.09,3 7.31,3.45
-            Z
-        `,
-        // transform: 'translate(140 105) scale(0.1) translate(-140 -105)',
+        d: `
+          M 100,220
+          Q 160,160 195,100
+          H 5
+          Q 42,160 100,220
+        Z`
       },
-      repeat: -1
-      // ease: Cubic.easeInOut
+      scaleY: 0.75,
+      scaleX: 0.9,
+      transformOrigin: '50% 100%',
+      ease: Power0.easeNone
+    }).to(this.topBottomSand.nativeElement, 5, {
+      attr: {
+        d: `
+          M 100,220
+          Q 150,160 195,100
+          H 5
+          Q 52,160 100,220
+        Z`
+      },
+      scaleY: 0.5,
+      scaleX: 0.7,
+      transformOrigin: '50% 100%',
+      ease: Power0.easeNone
+    }).to(this.topBottomSand.nativeElement, 5, {
+      attr: {
+        d: `
+          M 100,220
+          Q 150,160 195,100
+          H 5
+          Q 52,160 100,220
+        Z`
+      },
+      scaleY: 0.25,
+      scaleX: 0.4,
+      transformOrigin: '50% 100%',
+      ease: Power0.easeNone
+    }).to(this.topBottomSand.nativeElement, 5, {
+      attr: {
+        d: `
+          M 100,220
+          Q 160,160 195,100
+          H 5
+          Q 22,160 100,220
+        Z`
+      },
+      scale: 0,
+      transformOrigin: '50% 100%',
+      ease: Power0.easeNone
     });
 
-    TweenMax.to(this.topTopSand.nativeElement, 50, {
+    const topTopSandTimeline: TimelineLite = new TimelineLite();
+    topTopSandTimeline.to(this.topTopSand.nativeElement, 5, {
+      scaleY: 0.75,
+      scaleX: 0.9,
+      svgOrigin: '100 220',
+      ease: Power0.easeNone
+    }).to(this.topTopSand.nativeElement, 5, {
+      scaleY: 0.5,
+      scaleX: 0.7,
+      svgOrigin: '100 220',
+      ease: Power0.easeNone
+    }).to(this.topTopSand.nativeElement, 5, {
+      scaleY: 0.25,
+      scaleX: 0.4,
+      svgOrigin: '100 220',
+      ease: Power0.easeNone
+    }).to(this.topTopSand.nativeElement, 5, {
+      scale: 0,
+      svgOrigin: '100 220',
+      ease: Power0.easeNone
+      });
+
+    const droppingSandTimeline1: TimelineLite = new TimelineLite();
+    droppingSandTimeline1.to(this.droppingSand1.nativeElement, .4, {
       attr: {
-        cx: '100.4',
-        cy: '216',
-        rx: '8',
-        ry: '1.74'
+        cy: 448
       },
       repeat: -1
     });
+
+    const droppingSandTimeline2: TimelineLite = new TimelineLite();
+    droppingSandTimeline2.to(this.droppingSand2.nativeElement, .45, {
+      attr: {
+        cy: 448,
+        cx: 101
+      },
+      repeat: -1
+    });
+
+    const droppingSandTimeline3: TimelineLite = new TimelineLite();
+    droppingSandTimeline3.to(this.droppingSand3.nativeElement, .5, {
+      attr: {
+        cy: 448,
+        cx: 99
+      },
+      onComplete: this.droppingSandCheck
+    });
+
+
+  }
+
+  droppingSandCheck() {
+    
   }
 }
-
-// <path class="top-bottom-sand" d="
-// M 100.5,220.36
-// a 1.6,1.6 0 0,0 0.43,-0.07
-// c 1.21,-0.4 5.42,-2 7.15,-3.41
-// l 0,-0.06
-// a 1.35,1.35 0 0,0 0.21,-1.46
-// H 92.72
-// a 1.23,1.23 0 0,0 0,1.35
-// l 0.13,0.13
-// c 1.73,1.46 6.09,3 7.31,3.45
-// Z" />
-
-// <ellipse class="top-top-sand" cx="100.5" cy="215" rx="8" ry="1.74"/>
