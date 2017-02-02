@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class TimeService {
@@ -14,6 +15,8 @@ export class TimeService {
   timerIsRunning: boolean = false;
   pausedTime: number = 0;
   savedLengths: number[] = [];
+  updateAnimation: Subject<number> = new Subject<number>();
+  stopAnimation: Subject<any> = new Subject<any>();
 
   constructor() { }
 
@@ -28,14 +31,18 @@ export class TimeService {
     if (this.currentMode === 'pomodoroFinished' && this.breakLength > 0) {
       this.updateCurrentMode();
       this.startButtonState = 'Restart Break';
+      this.updateAnimation.next(this.savedLengths[1]);
       this.intervalId = setInterval(() => { this.getTimeRemaining(this.savedLengths[1]); }, 100);
     } else if (this.currentMode === 'breakFinished' && this.pomodoroLength > 0) {
       this.updateCurrentMode();
       this.startButtonState = 'Restart Pomodoro';
+      this.updateAnimation.next(this.savedLengths[0]);
       this.intervalId = setInterval(() => { this.getTimeRemaining(this.savedLengths[0]); }, 100);
     } else if (this.currentMode === 'pomodoroTimer' && this.pomodoroLength > 0) {
+      this.updateAnimation.next(this.savedLengths[0]);
       this.intervalId = setInterval(() => { this.getTimeRemaining(this.savedLengths[0]); }, 100);
     } else if (this.currentMode === 'breakTimer' && this.breakLength > 0) {
+      this.updateAnimation.next(this.savedLengths[1]);
       this.intervalId = setInterval(() => { this.getTimeRemaining(this.savedLengths[1]); }, 100);
     }
   }
@@ -81,6 +88,7 @@ export class TimeService {
         this.timerIsRunning = true;
         this.startTimerTracking();
       }
+      this.stopAnimation.next();
     }
   }
 
