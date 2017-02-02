@@ -22,6 +22,7 @@ export class HourglassComponent implements OnInit {
 
   constructor(private timeService: TimeService) {
     timeService.updateAnimation.subscribe(value => this.animation(value));
+    timeService.stopAnimation.subscribe(value => this.stopAnimation());
   }
 
   ngOnInit() {
