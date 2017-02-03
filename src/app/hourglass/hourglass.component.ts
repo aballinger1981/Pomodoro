@@ -194,21 +194,7 @@ export class HourglassComponent implements OnInit {
         cy: 448,
         cx: 99
       },
-      // onComplete: this.droppingSandCheck,
-      // onCompleteScope: this
+      repeat: -1
     });
   }
-
-  // droppingSandCheck() {
-  //   if (this.timerService.currentMode === undefined) { return; }
-
-  //   if (this.timerService.startButtonState === 'Start Pomodoro'
-  //     || this.timerService.startButtonState === 'Start Break') {
-  //     this.droppingSandTimeline1.progress(1);
-  //     this.droppingSandTimeline2.progress(1);
-  //     this.droppingSandTimeline3.progress(1);
-  //     this.topBottomSandTimeline.progress(0).pause();
-  //     this.topTopSandTimeline.progress(0).pause();
-  //   }
-  //  }
 }
