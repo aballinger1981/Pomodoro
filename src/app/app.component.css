@@ -14,7 +14,7 @@
   padding: 2vw 0 2vw 0;
 }
 
-app-start-restart {
+app-start-restart-stop {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
