@@ -19,9 +19,6 @@ export class HourglassComponent implements OnInit {
   droppingSandTimeline1: TimelineLite = new TimelineLite();
   droppingSandTimeline2: TimelineLite = new TimelineLite();
   droppingSandTimeline3: TimelineLite = new TimelineLite();
-  topTopSandProgress: number;
-  topBottomSandProgress: number;
-  topTweenDuration: number;
 
   constructor(private timerService: TimerService,
     private startRestartStopService: StartRestartStopService) {
