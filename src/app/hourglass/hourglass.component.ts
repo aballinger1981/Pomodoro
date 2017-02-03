@@ -38,6 +38,11 @@ export class HourglassComponent implements OnInit {
 
   resetAndStartAnimations(duration) {
     duration = duration * 60 / 4 - .25;
+    this.topTopSandTimeline.paused(false);
+    this.topBottomSandTimeline.paused(false);
+    this.droppingSandTimeline1.paused(false);
+    this.droppingSandTimeline2.paused(false);
+    this.droppingSandTimeline3.paused(false);
     this.topBottomSandTimeline.progress(0);
     this.topTopSandTimeline.progress(0);
     this.droppingSandTimeline1.progress(0);
@@ -58,22 +63,22 @@ export class HourglassComponent implements OnInit {
   }
 
   pauseAnimation() {
-    this.topTweenDuration = this.topTopSandTimeline.duration();
-    this.topTopSandProgress = this.topTopSandTimeline.progress();
-    this.topBottomSandProgress = this.topBottomSandTimeline.progress();
-    this.topBottomSandTimeline.pause();
-    this.topTopSandTimeline.pause();
-    this.droppingSandTimeline1.progress(1);
-    this.droppingSandTimeline2.progress(1);
-    this.droppingSandTimeline3.progress(1);
+    this.topTopSandTimeline.paused(!this.topTopSandTimeline.paused());
+    this.topBottomSandTimeline.paused(!this.topBottomSandTimeline.paused());
+    this.droppingSandTimeline1.progress(0);
+    this.droppingSandTimeline2.progress(0);
+    this.droppingSandTimeline3.progress(0);
+    this.droppingSandTimeline1.paused(!this.droppingSandTimeline1.paused());
+    this.droppingSandTimeline2.paused(!this.droppingSandTimeline2.paused());
+    this.droppingSandTimeline3.paused(!this.droppingSandTimeline3.paused());
   }
 
   resumeAnimation() {
-    TweenMax.killAll();
-    this.topTopSandTimeline.progress(this.topTopSandProgress);
-    this.topBottomSandTimeline.progress(this.topBottomSandProgress);
-    this.droppingSandAnimation();
-    this.sandAnimation(this.topTweenDuration - (this.topTweenDuration * this.topTopSandProgress));
+    this.topTopSandTimeline.paused(!this.topTopSandTimeline.paused());
+    this.topBottomSandTimeline.paused(!this.topBottomSandTimeline.paused());
+    this.droppingSandTimeline1.paused(!this.droppingSandTimeline1.paused());
+    this.droppingSandTimeline2.paused(!this.droppingSandTimeline2.paused());
+    this.droppingSandTimeline3.paused(!this.droppingSandTimeline3.paused());
   }
 
   sandAnimation(duration) {
