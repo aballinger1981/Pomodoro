@@ -1,20 +1,20 @@
 <div class="break-length">
 <span>Break Length: </span>
-<input type="number" [(ngModel)]="timeService.breakLength" min="1">
+<input type="number" [(ngModel)]="timerService.breakLength" min="1">
 </div>
 
 <div class="pomodoro-length">
 <span>Pomodoro Length: </span>
-<input type="number" [(ngModel)]="timeService.pomodoroLength" min="1">
+<input type="number" [(ngModel)]="timerService.pomodoroLength" min="1">
 </div>
 
 <div class="auto-start">
 <span>Start Timer Automatically? </span>
-<input type="checkbox" [(ngModel)]="timeService.autoStartNewTimers">
+<input type="checkbox" [(ngModel)]="timerService.autoStartNewTimers">
 </div>
 
 <div class="pomodoro-count">
 <span>Pomodoro Count: </span>
-<span>{{timeService.numberOfPomodoros}}</span>
-<button (click)="timeService.clearCount()" class="clear">Clear</button>
+<span>{{timerService.numberOfPomodoros}}</span>
+<button (click)="timerService.clearCount()" class="clear">Clear</button>
 </div>
