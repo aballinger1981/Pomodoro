@@ -19,6 +19,9 @@ export class HourglassComponent implements OnInit {
   droppingSandTimeline1: TimelineLite = new TimelineLite();
   droppingSandTimeline2: TimelineLite = new TimelineLite();
   droppingSandTimeline3: TimelineLite = new TimelineLite();
+  topTopSandProgress: number;
+  topBottomSandProgress: number;
+  topTweenDuration: number;
 
   constructor(private timerService: TimerService,
     private startRestartStopService: StartRestartStopService) {
@@ -34,12 +37,13 @@ export class HourglassComponent implements OnInit {
   }
 
   resetAndStartAnimations(duration) {
-    TweenMax.killAll();
+    duration = duration * 60 / 4 - .25;
     this.topBottomSandTimeline.progress(0);
     this.topTopSandTimeline.progress(0);
     this.droppingSandTimeline1.progress(0);
     this.droppingSandTimeline2.progress(0);
     this.droppingSandTimeline3.progress(0);
+    TweenMax.killAll();
     this.sandAnimation(duration);
     this.droppingSandAnimation();
   }
@@ -54,23 +58,38 @@ export class HourglassComponent implements OnInit {
   }
 
   pauseAnimation() {
+    this.topTweenDuration = this.topTopSandTimeline.duration();
+    this.topTopSandProgress = this.topTopSandTimeline.progress();
+    this.topBottomSandProgress = this.topBottomSandTimeline.progress();
     this.topBottomSandTimeline.pause();
     this.topTopSandTimeline.pause();
-    this.droppingSandTimeline1.kill();
-    this.droppingSandTimeline2.kill();
-    this.droppingSandTimeline3.kill();
+    this.droppingSandTimeline1.progress(1);
+    this.droppingSandTimeline2.progress(1);
+    this.droppingSandTimeline3.progress(1);
   }
 
   resumeAnimation() {
-    this.topBottomSandTimeline.play();
-    this.topTopSandTimeline.play();
+    TweenMax.killAll();
+    this.topTopSandTimeline.progress(this.topTopSandProgress);
+    this.topBottomSandTimeline.progress(this.topBottomSandProgress);
     this.droppingSandAnimation();
+    this.sandAnimation(this.topTweenDuration - (this.topTweenDuration * this.topTopSandProgress));
   }
 
   sandAnimation(duration) {
-    duration = duration * 60 / 4 - .25;
-
-    this.topBottomSandTimeline.to(this.topBottomSand.nativeElement, duration, {
+    this.topBottomSandTimeline.from(this.topBottomSand.nativeElement, 0, {
+      attr: {
+        d: `M 100,220
+          Q 180,160 195,100
+          H 5
+          Q 22,160 100,220
+          Z`
+      },
+      scaleY: 1,
+      scaleX: 1,
+      transformOrigin: '50% 100%',
+      ease: Power0.easeNone
+    }).to(this.topBottomSand.nativeElement, duration, {
       attr: {
         d: `
           M 100,220
@@ -123,7 +142,11 @@ export class HourglassComponent implements OnInit {
       ease: Power0.easeNone,
     });
 
-    this.topTopSandTimeline.to(this.topTopSand.nativeElement, duration, {
+    this.topTopSandTimeline.from(this.topTopSand.nativeElement, 0, {
+      scaleY: 1,
+      scaleX: 1,
+      ease: Power0.easeNone
+    }).to(this.topTopSand.nativeElement, duration, {
       scaleY: 0.75,
       scaleX: 0.9,
       svgOrigin: '100 220',
