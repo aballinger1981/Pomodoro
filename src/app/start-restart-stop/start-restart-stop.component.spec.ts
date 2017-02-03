@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { StartRestartComponent } from './start-restart.component';
+import { StartRestartStopComponent } from './start-restart-stop.component';
 
 describe('StartRestartComponent', () => {
-  let component: StartRestartComponent;
-  let fixture: ComponentFixture<StartRestartComponent>;
+  let component: StartRestartStopComponent;
+  let fixture: ComponentFixture<StartRestartStopComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StartRestartComponent ]
+      declarations: [ StartRestartStopComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StartRestartComponent);
+    fixture = TestBed.createComponent(StartRestartStopComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

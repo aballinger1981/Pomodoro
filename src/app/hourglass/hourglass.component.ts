@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { TimeService } from '../time.service';
+import { TimerService } from '../timer.service';
+import { StartRestartStopService } from '../start-restart-stop.service';
 
 @Component({
   selector: 'app-hourglass',
@@ -15,46 +16,61 @@ export class HourglassComponent implements OnInit {
 
   topBottomSandTimeline: TimelineLite = new TimelineLite();
   topTopSandTimeline: TimelineLite = new TimelineLite();
-
   droppingSandTimeline1: TimelineLite = new TimelineLite();
   droppingSandTimeline2: TimelineLite = new TimelineLite();
   droppingSandTimeline3: TimelineLite = new TimelineLite();
 
-  constructor(private timeService: TimeService) {
-    timeService.updateAnimation.subscribe(value => this.animation(value));
-    timeService.stopAnimation.subscribe(value => this.stopAnimation());
+  constructor(private timerService: TimerService,
+    private startRestartStopService: StartRestartStopService) {
+    timerService.startAnimation.subscribe(duration => this.resetAndStartAnimations(duration));
+    timerService.stopAnimation.subscribe(() => this.stopAnimation());
+    startRestartStopService.stopAnimation.subscribe(() => this.stopAnimation());
+    startRestartStopService.resumeAnimation.subscribe(() => this.resumeAnimation());
+    startRestartStopService.pauseAnimation.subscribe(() => this.pauseAnimation());
   }
 
   ngOnInit() {
 
   }
 
+  resetAndStartAnimations(duration) {
+    TweenMax.killAll();
+    this.topBottomSandTimeline.progress(0);
+    this.topTopSandTimeline.progress(0);
+    this.droppingSandTimeline1.progress(0);
+    this.droppingSandTimeline2.progress(0);
+    this.droppingSandTimeline3.progress(0);
+    this.sandAnimation(duration);
+    this.droppingSandAnimation();
+  }
+
   stopAnimation() {
     this.topBottomSandTimeline.progress(0);
     this.topTopSandTimeline.progress(0);
-    this.droppingSandTimeline1.progress(1);
-    this.droppingSandTimeline2.progress(1);
-    this.droppingSandTimeline3.progress(1);
+    this.droppingSandTimeline1.progress(0);
+    this.droppingSandTimeline2.progress(0);
+    this.droppingSandTimeline3.progress(0);
+    TweenMax.killAll();
   }
 
   pauseAnimation() {
     this.topBottomSandTimeline.pause();
     this.topTopSandTimeline.pause();
-    this.droppingSandTimeline1.progress(1);
-    this.droppingSandTimeline2.progress(1);
-    this.droppingSandTimeline3.progress(1);
+    this.droppingSandTimeline1.kill();
+    this.droppingSandTimeline2.kill();
+    this.droppingSandTimeline3.kill();
   }
 
   resumeAnimation() {
-    this.topBottomSandTimeline.resume();
-    this.topTopSandTimeline.resume();
-    this.droppingSandTimeline1.play();
-    this.droppingSandTimeline2.play();
-    this.droppingSandTimeline3.play();
+    this.topBottomSandTimeline.play();
+    this.topTopSandTimeline.play();
+    this.droppingSandAnimation();
   }
 
-  animation(duration) {
-    this.topBottomSandTimeline.to(this.topBottomSand.nativeElement, duration * 60 / 4, {
+  sandAnimation(duration) {
+    duration = duration * 60 / 4 - .25;
+
+    this.topBottomSandTimeline.to(this.topBottomSand.nativeElement, duration, {
       attr: {
         d: `
           M 100,220
@@ -67,7 +83,7 @@ export class HourglassComponent implements OnInit {
       scaleX: 0.9,
       transformOrigin: '50% 100%',
       ease: Power0.easeNone
-    }).to(this.topBottomSand.nativeElement, duration * 60 / 4, {
+    }).to(this.topBottomSand.nativeElement, duration, {
       attr: {
         d: `
           M 100,220
@@ -80,7 +96,7 @@ export class HourglassComponent implements OnInit {
       scaleX: 0.7,
       transformOrigin: '50% 100%',
       ease: Power0.easeNone
-    }).to(this.topBottomSand.nativeElement, duration * 60 / 4, {
+    }).to(this.topBottomSand.nativeElement, duration, {
       attr: {
         d: `
           M 100,220
@@ -93,7 +109,7 @@ export class HourglassComponent implements OnInit {
       scaleX: 0.4,
       transformOrigin: '50% 100%',
       ease: Power0.easeNone
-    }).to(this.topBottomSand.nativeElement, duration * 60 / 4, {
+    }).to(this.topBottomSand.nativeElement, duration, {
       attr: {
         d: `
           M 100,220
@@ -104,31 +120,32 @@ export class HourglassComponent implements OnInit {
       },
       scale: 0,
       transformOrigin: '50% 100%',
-      ease: Power0.easeNone
+      ease: Power0.easeNone,
     });
 
-    this.topTopSandTimeline.to(this.topTopSand.nativeElement, duration * 60 / 4, {
+    this.topTopSandTimeline.to(this.topTopSand.nativeElement, duration, {
       scaleY: 0.75,
       scaleX: 0.9,
       svgOrigin: '100 220',
       ease: Power0.easeNone
-    }).to(this.topTopSand.nativeElement, duration * 60 / 4, {
+    }).to(this.topTopSand.nativeElement, duration, {
       scaleY: 0.5,
       scaleX: 0.7,
       svgOrigin: '100 220',
       ease: Power0.easeNone
-    }).to(this.topTopSand.nativeElement, duration * 60 / 4, {
+    }).to(this.topTopSand.nativeElement, duration, {
       scaleY: 0.25,
       scaleX: 0.4,
       svgOrigin: '100 220',
       ease: Power0.easeNone
-    }).to(this.topTopSand.nativeElement, duration * 60 / 4, {
+    }).to(this.topTopSand.nativeElement, duration, {
       scale: 0,
       svgOrigin: '100 220',
       ease: Power0.easeNone
     });
+  }
 
-
+  droppingSandAnimation() {
     this.droppingSandTimeline1.to(this.droppingSand1.nativeElement, .4, {
       attr: {
         cy: 448
@@ -149,21 +166,21 @@ export class HourglassComponent implements OnInit {
         cy: 448,
         cx: 99
       },
-      onComplete: this.droppingSandCheck,
-      onCompleteScope: this
+      // onComplete: this.droppingSandCheck,
+      // onCompleteScope: this
     });
   }
 
-  droppingSandCheck() {
-    if (this.timeService.currentMode === undefined) { return; }
+  // droppingSandCheck() {
+  //   if (this.timerService.currentMode === undefined) { return; }
 
-    if (this.timeService.startButtonState === 'Start Pomodoro'
-      || this.timeService.startButtonState === 'Start Break') {
-      this.droppingSandTimeline1.progress(1);
-      this.droppingSandTimeline2.progress(1);
-      this.droppingSandTimeline3.progress(1);
-      this.topBottomSandTimeline.progress(0).pause();
-      this.topTopSandTimeline.progress(0).pause();
-    }
-   }
+  //   if (this.timerService.startButtonState === 'Start Pomodoro'
+  //     || this.timerService.startButtonState === 'Start Break') {
+  //     this.droppingSandTimeline1.progress(1);
+  //     this.droppingSandTimeline2.progress(1);
+  //     this.droppingSandTimeline3.progress(1);
+  //     this.topBottomSandTimeline.progress(0).pause();
+  //     this.topTopSandTimeline.progress(0).pause();
+  //   }
+  //  }
 }

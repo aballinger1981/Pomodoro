@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TimeService } from '../time.service';
+import { TimerService } from '../timer.service';
 
 @Component({
   selector: 'app-clock',
@@ -8,7 +8,7 @@ import { TimeService } from '../time.service';
 })
 export class ClockComponent implements OnInit {
 
-  constructor(private timeService: TimeService) { }
+  constructor(private timerService: TimerService) { }
 
   ngOnInit() {
   }
