@@ -4,10 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { TimeService } from './time.service';
+import { TimerService } from './timer.service';
+import { StartRestartStopService } from './start-restart-stop.service';
 import { HourglassComponent } from './hourglass/hourglass.component';
 import { ClockComponent } from './clock/clock.component';
-import { StartRestartComponent } from './start-restart/start-restart.component';
+import { StartRestartStopComponent } from './start-restart-stop/start-restart-stop.component';
 import { TimerSettingsComponent } from './timer-settings/timer-settings.component';
 
 @NgModule({
@@ -15,7 +16,7 @@ import { TimerSettingsComponent } from './timer-settings/timer-settings.componen
     AppComponent,
     HourglassComponent,
     ClockComponent,
-    StartRestartComponent,
+    StartRestartStopComponent,
     TimerSettingsComponent
   ],
   imports: [
@@ -23,7 +24,7 @@ import { TimerSettingsComponent } from './timer-settings/timer-settings.componen
     FormsModule,
     HttpModule
   ],
-  providers: [TimeService],
+  providers: [TimerService, StartRestartStopService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
