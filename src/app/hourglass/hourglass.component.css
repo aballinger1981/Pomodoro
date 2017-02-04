@@ -23,12 +23,12 @@
   fill: url(#Water_5);
 }
 
-.top-bottom-sand {
+.top-bottom-sand, .bottom-bottom-sand {
   fill: url(#Earthtone_4);
   transform-origin: 50% 50%;
 }
 
-.top-top-sand {
+.top-top-sand, .bottom-top-sand {
   fill: url(#Earthtone_5);
 }
 
