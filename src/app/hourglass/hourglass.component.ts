@@ -34,7 +34,6 @@ export class HourglassComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   resetAndStartAnimations(duration) {
@@ -188,25 +187,24 @@ export class HourglassComponent implements OnInit {
   bottomSandAnimation(duration) {
     this.bottomBottomSandTimeline.from(this.bottomBottomSand.nativeElement, 0, {
       attr: {
-        d:
-          `M 100,441
-          Q 180,450 195,340
-          H 6
-          Q 15,460 135,440
-          Z`
+        d: `
+        M 100,442
+        C 160,445 200,390 192,337
+        H 8
+        C 0,390 45,445 100,442
+        Z`
       },
-      scaleY: 0,
-      scaleX: 0,
+      scale: 0,
       transformOrigin: '50% 100%',
       ease: Power0.easeNone
     }).to(this.bottomBottomSand.nativeElement, duration, {
       attr: {
         d: `
-          M 100,441
-          Q 210,450 225,340
-          H 3
-          Q 5,460 165,440
-          Z`
+        M 100,442
+        C 160,445 200,390 192,337
+        H 8
+        C 0,390 45,445 100,442
+        Z`
       },
       scaleY: 0.25,
       scaleX: 0.4,
@@ -215,11 +213,11 @@ export class HourglassComponent implements OnInit {
     }).to(this.bottomBottomSand.nativeElement, duration, {
       attr: {
         d: `
-          M 100,441
-          Q 190,450 220,340
-          H 4
-          Q 10,460 155,440
-          Z`
+        M 100,442
+        C 160,445 200,390 192,337
+        H 8
+        C 0,390 45,445 100,442
+        Z`
       },
       scaleY: 0.5,
       scaleX: 0.7,
@@ -228,11 +226,11 @@ export class HourglassComponent implements OnInit {
     }).to(this.bottomBottomSand.nativeElement, duration, {
       attr: {
         d: `
-          M 100,441
-          Q 190,450 210,340
-          H 12
-          Q 25,455 155,440
-          Z`
+        M 100,442
+        C 160,445 200,390 192,337
+        H 8
+        C 0,390 45,445 100,442
+        Z`
       },
       scaleY: 0.75,
       scaleX: 0.9,
@@ -241,11 +239,11 @@ export class HourglassComponent implements OnInit {
     }).to(this.bottomBottomSand.nativeElement, duration, {
       attr: {
         d: `
-          M 100,441
-          Q 185,450 202,340
-          H 14
-          Q 30,455 135,440
-          Z`
+        M 100,442
+        C 160,445 200,390 192,337
+        H 8
+        C 0,390 45,445 100,442
+        Z`
       },
       scale: 1,
       transformOrigin: '50% 100%',
@@ -254,26 +252,25 @@ export class HourglassComponent implements OnInit {
 
     this.bottomTopSandTimeline.from(this.bottomTopSand.nativeElement, 0, {
       scaleY: 0,
-      scaleX: 0,
       ease: Power0.easeNone
     }).to(this.bottomTopSand.nativeElement, duration, {
       scaleY: 0.25,
       scaleX: 0.4,
-      svgOrigin: '100 441',
+      svgOrigin: '100 442',
       ease: Power0.easeNone
     }).to(this.bottomTopSand.nativeElement, duration, {
       scaleY: 0.5,
       scaleX: 0.7,
-      svgOrigin: '100 441',
+      svgOrigin: '100 442',
       ease: Power0.easeNone
     }).to(this.bottomTopSand.nativeElement, duration, {
       scaleY: 0.75,
       scaleX: 0.9,
-      svgOrigin: '100 441',
+      svgOrigin: '100 442',
       ease: Power0.easeNone
     }).to(this.bottomTopSand.nativeElement, duration, {
       scale: 1,
-      svgOrigin: '100 441',
+      svgOrigin: '100 442',
       ease: Power0.easeNone
     });
   }
